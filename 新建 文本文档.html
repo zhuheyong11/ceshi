@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>消费死刑测试器 - 黑田尚子改造计划</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #fff5f7;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .question {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        .options label {
+            display: block;
+            margin: 10px 0;
+            padding: 12px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        .options input:checked + label {
+            border-color: #ff4757;
+            background: #fff0f0;
+        }
+        #result {
+            display: none;
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+        }
+        .sentence {
+            font-size: 24px;
+            color: #ff4757;
+            margin: 20px 0;
+        }
+        .badge {
+            width: 120px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💰 你的钱正在被谋杀吗？</h1>
+        
+        <!-- 测试题容器 -->
+        <div id="quiz">
+            <div class="question">
+                <h3>1/7 发工资后朋友约吃人均500的网红餐厅，你会？</h3>
+                <div class="options">
+                    <input type="radio" name="q1" value="3" id="q1a">
+                    <label for="q1a">A. 去！发工资就该犒劳自己</label>
+                    <!-- 其他选项省略... -->
+                </div>
+            </div>
+            <!-- 其他6题结构相同... -->
+        </div>
+
+        <button onclick="calculate()">⚖️ 立即宣判</button>
+
+        <!-- 测试结果 -->
+        <div id="result">
+            < img src="handcuffs.png" class="badge">
+            <div class="sentence" id="sentence"></div>
+            <div id="diagnosis"></div>
+            <button onclick="generateReport()">🖨️ 生成改造证书</button>
+        </div>
+    </div>
+
+    <script>
+        // 计分规则
+        const scores = {
+            q1: {a:3, b:2, c:1, d:0},
+            // 其他题目分数配置...
+        };
+
+        // 诊断结果配置
+        const results = [
+            {
+                min: 18,
+                title: "死刑立即执行型",
+                desc: "检测到7项消费死罪！需立即启动ICU急救方案...",
+                badge: "death.png"
+            },
+            // 其他结果配置...
+        ];
+
+        function calculate() {
+            let total = 0;
+            // 计算总分逻辑...
+            
+            const result = results.find(r => total >= r.min);
+            document.getElementById("sentence").innerHTML = `
+                <h2>${result.title}</h2>
+                <p>你的2024破产指数：🔥${'🔥'.repeat(Math.floor(total/3))}</p >
+            `;
+            document.getElementById("diagnosis").innerHTML = result.desc;
+            document.getElementById("result").style.display = 'block';
+        }
+
+        function generateReport() {
+            // 生成可保存的改造证书
+            const canvas = document.createElement('canvas');
+            // 绘制证书逻辑...
+            
+            const link = document.createElement('a');
+            link.download = '消费死刑判决书.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>
